@@ -3,6 +3,7 @@
 
 #### External Dependencies
 > DocumentFormat.OpenXML
+
 You can install it by running `Install-Package DocumentFormat.OpenXml` in Nu-Get Package Manager.
 
 #### Let's Start
@@ -27,7 +28,7 @@ class Product : ExcelRow
 (Later we will show how to change them dynamically)
 
 ```c#
-  class Product : RowData
+  class Product : ExcelRow
   {
       [DataCell("A")]
       public string Name { get; set; }
