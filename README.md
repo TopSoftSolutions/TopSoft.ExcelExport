@@ -1,4 +1,4 @@
-#### TopsExcel.Export
+#### TopSoft.ExcelExport
 ~~Small~~ Very Small Toolkit to easy exporting data to excel
 
 #### External Dependencies
