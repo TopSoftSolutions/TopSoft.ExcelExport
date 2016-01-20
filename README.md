@@ -47,8 +47,8 @@ class Product : ExcelRow
 SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook);
 ```
 
-#### 4.1 Initialize `ExcelExportContext` object with `SpreadsheetDocument.` 
-#### 4.2 Just Call `RenderEntity` for each entity you want to appear in excel.
+#### 4 Initialize `ExcelExportContext` object with `SpreadsheetDocument.` 
+Just Call `RenderEntity` for each entity you want to appear in excel.
 
 ```c#
       var excelExportContext = new ExportContext(spreadsheetDocument)
