@@ -6,6 +6,9 @@
 
 You can install it by running `Install-Package DocumentFormat.OpenXml` in Nu-Get Package Manager.
 
+#### Restrictions
+`Topsoft.ExcelExport` now works only with simple data types in models.
+
 #### Let's Start
 
 For example we have `Product` class and we want to export it to excel.
@@ -24,19 +27,19 @@ class Product
 class Product : ExcelRow
 ```
 
-#### 2. Add `CellData` attribute to `Product` class properties to specify columns where they must be placed.
-(Later we will show how to change them dynamically)
+#### 2. Add `CellData` attribute to `Product` class properties to specify excel column names where they must be placed.
+(Later we will show how to change them on the fly)
 
 ```c#
   class Product : ExcelRow
   {
-      [DataCell("A")]
+      [CellData("A")]
       public string Name { get; set; }
 
-      [DataCell("B")]
+      [CellData("B")]
       public string Description { get; set; }
 
-      [DataCell("C")]
+      [CellData("C")]
       public decimal Price { get; set; }
   }
 ```
@@ -47,7 +50,7 @@ class Product : ExcelRow
 SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook);
 ```
 
-#### 4 Initialize `ExcelExportContext` object with `SpreadsheetDocument.` 
+#### 4. Initialize `ExcelExportContext` object with `SpreadsheetDocument.` 
 Just Call `RenderEntity` for each entity you want to appear in excel.
 
 ```c#
@@ -60,6 +63,19 @@ Just Call `RenderEntity` for each entity you want to appear in excel.
       }
 ```
 
-That's All!
+#### 5. Adding excel column mappings on the fly.
+You can add excel column mapping on the fly, wherever you want, before calling `RenderEntity` for model. Column Mappings are instance-level and will affect only object for which `MapColumn` was called.
 
-P.S. Toolkit is now in development stage. We will bee ready ~~soon~~ very soon.
+For example:
+
+```c#
+   if(product.Price > 44)
+   {
+        product.MapColumn<Product>(x => x.Description, "F");
+   }
+```
+
+In this example only this `product` 's Description will be placed at column "F". Other ones will be placed at their initial place ( specified by `CellData` attribute.
+
+
+That's All!
