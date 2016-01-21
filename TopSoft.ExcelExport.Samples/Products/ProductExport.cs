@@ -37,7 +37,7 @@ namespace TopSoft.ExcelExport.Samples.Products
                     excelExportContext.RenderEntity(product, rowNo);
                 }
 
-                excelExportContext.SpreadSheet.WorkbookPart.Workbook.Save();
+                excelExportContext.SaveChanges();
             }
         
         }
