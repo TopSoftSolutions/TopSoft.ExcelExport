@@ -50,7 +50,7 @@ class Product : ExcelRow
 SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook);
 ```
 
-#### Step 4. Initialize `ExcelExportContext` object by passing the instance of the target `SpreadsheetDocument. Then by calling the `RenderEntity`  for each of the entities, they'll be exported to the Excel file.
+#### Step 4. Initialize `ExcelExportContext` object by passing the instance of the target `SpreadsheetDocument.` Then by calling the `RenderEntity`  for each of the entities, they'll be exported to the Excel file.
 
 ```c#
       var excelExportContext = new ExportContext(spreadsheetDocument)
