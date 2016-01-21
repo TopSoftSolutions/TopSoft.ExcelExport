@@ -1,8 +1,9 @@
 #### TopSoft.ExcelExport
-~~Small~~ Very Small Toolkit to easy exporting data to excel
+Toolkit to easy exporting data to excel via C#
 
 #### Install TopSoft.ExcelExport via NuGet
 To install TopSoft.ExcelExport, run the following command in the Package Manager Console
+
 `PM> Install-Package TopSoft.ExcelExport`
 
 #### External Dependencies
