@@ -86,5 +86,10 @@ namespace TopSoft.ExcelExport
                 SheetData.Append(rowData.Row);
             }
         }
+
+        public void SaveChanges()
+        {
+            Worksheet.Save();
+        }
     }
 }
