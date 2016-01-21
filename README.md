@@ -1,15 +1,14 @@
 #### TopSoft.ExcelExport
 ~~Small~~ Very Small Toolkit to easy exporting data to excel
 
+#### Install TopSoft.ExcelExport via NuGet
+To install TopSoft.ExcelExport, run the following command in the Package Manager Console
+`PM> Install-Package TopSoft.ExcelExport`
+
 #### External Dependencies
 > OpenXML SDK 2.5
 
 You can install it by running `Install-Package DocumentFormat.OpenXml` in the Nu-Get Package Manager.
-
-#### Install TopSoft.ExcelExport via NuGet
-To install TopSoft.ExcelExport, run the following command in the Package Manager Console
-
-`PM> Install-Package TopSoft.ExcelExport`
 
 #### Restrictions
 `Topsoft.ExcelExport` now works only for simple data types in models.
