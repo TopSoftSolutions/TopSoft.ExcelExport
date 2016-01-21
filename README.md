@@ -60,6 +60,7 @@ SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(fileName, S
           rowNo++;
           excelExportContext.RenderEntity(product, rowNo);
       }
+      excelExportContext.SaveChanges();
 ```
 
 #### Step 5. Adding excel column mappings on the fly.
