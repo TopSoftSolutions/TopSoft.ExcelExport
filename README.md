@@ -2,16 +2,16 @@
 ~~Small~~ Very Small Toolkit to easy exporting data to excel
 
 #### External Dependencies
-> DocumentFormat.OpenXML
+> OpenXML SDK 2.5
 
-You can install it by running `Install-Package DocumentFormat.OpenXml` in Nu-Get Package Manager.
+You can install it by running `Install-Package DocumentFormat.OpenXml` in the Nu-Get Package Manager.
 
 #### Restrictions
-`Topsoft.ExcelExport` now works only with simple data types in models.
+`Topsoft.ExcelExport` now works only for simple data types in models.
 
 #### Let's Start
 
-For example we have `Product` class and we want to export it to excel.
+Let's suppose we have the `Product` class that we want to export to Microsoft Excel document.
 
 ```c#
 class Product
@@ -21,14 +21,14 @@ class Product
     public decimal Price { get; set; }
 }
 ```
-#### 1. Inherit `ExcelRow` in `Product` class.
+#### Step 1. Inherit `Product` class from the `ExcelRow` base class.
 
 ```c#
 class Product : ExcelRow
 ```
 
-#### 2. Add `CellData` attribute to `Product` class properties to specify excel column names where they must be placed.
-(Later we will show how to change them on the fly)
+#### Step 2. Add `CellData` attribute to the`Product` class's properties in-order to specify the document's column where the data should be placed.
+(Later we will show how to change the column names on the fly.)
 
 ```c#
   class Product : ExcelRow
@@ -44,14 +44,13 @@ class Product : ExcelRow
   }
 ```
 
-#### 3. Create new excel or open existing one.
+#### Step 3. Create or open an Excel document using the OpenXML SDK.
 
 ```c#
 SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook);
 ```
 
-#### 4. Initialize `ExcelExportContext` object with `SpreadsheetDocument.` 
-Just Call `RenderEntity` for each entity you want to appear in excel.
+#### Step 4. Initialize `ExcelExportContext` object by passing the instance of the target `SpreadsheetDocument. Then by calling the `RenderEntity`  for each of the entities, they'll be exported to the Excel file.
 
 ```c#
       var excelExportContext = new ExportContext(spreadsheetDocument)
@@ -63,8 +62,8 @@ Just Call `RenderEntity` for each entity you want to appear in excel.
       }
 ```
 
-#### 5. Adding excel column mappings on the fly.
-You can add excel column mapping on the fly, wherever you want, before calling `RenderEntity` for model. Column Mappings are instance-level and will affect only object for which `MapColumn` was called.
+#### Step 5. Adding excel column mappings on the fly.
+You can add excel column mapping on the fly before calling `RenderEntity` function for model entities. Column Mappings are instance-level and will affect only the particular object for which `MapColumn` function has been called.
 
 For example:
 
@@ -75,7 +74,7 @@ For example:
    }
 ```
 
-In this example only this `product` 's Description will be placed at column "F". Other ones will be placed at their initial place ( specified by `CellData` attribute.
-
+In this example, the description will be placed at column "F" only for this particular instance of `product`. Other entities will continue to use column name specified by the `CellData` attribute.
 
 That's All!
+
