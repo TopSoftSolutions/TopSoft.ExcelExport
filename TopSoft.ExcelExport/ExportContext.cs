@@ -20,10 +20,41 @@ namespace TopSoft.ExcelExport
                 throw new ArgumentNullException("spreadSheet");
             }
 
-            // TODO check spreadSHeet if opened with canEdit flag
-            // TODO check worksheet, if not exist create
+            if(spreadSheet.FileOpenAccess != System.IO.FileAccess.ReadWrite)
+            {
+                throw new Exception("No access granted for created excel");
+            }
 
             SpreadSheet = spreadSheet;
+
+            if(SpreadSheet.WorkbookPart == null)
+            {
+                // Add a WorkbookPart to the document.
+                WorkbookPart workbookpart = SpreadSheet.AddWorkbookPart();
+                workbookpart.Workbook = new Workbook();
+
+                // Add a WorksheetPart to the WorkbookPart.
+                WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+                // Add Sheets to the Workbook.
+                Sheets sheets = SpreadSheet.WorkbookPart.Workbook.
+                    AppendChild<Sheets>(new Sheets());
+
+                // Append a new worksheet and associate it with the workbook.
+                Sheet sheet = new Sheet()
+                {
+                    Id = SpreadSheet.WorkbookPart.
+                    GetIdOfPart(worksheetPart),
+                    SheetId = 1,
+                    Name = "Sheet 1"
+                };
+                sheets.Append(sheet);
+
+                workbookpart.Workbook.Save();
+
+            }
+
             Worksheet = SpreadSheet.WorkbookPart.WorksheetParts.First().Worksheet;
             SheetData = Worksheet.GetFirstChild<SheetData>();
 

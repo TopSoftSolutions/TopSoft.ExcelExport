@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Spreadsheet;
 using TopSoft.ExcelExport.Attributes;
@@ -9,6 +12,33 @@ namespace TopSoft.ExcelExport.Entity
 {
     public abstract class ExcelRow
     {
+        private Dictionary<string, string> _propertyMappings = new Dictionary<string, string>();
+
+        public void MapColumn<T>(Expression<Func<T, object>> lambda, string columnName)
+        {
+            if(string.IsNullOrEmpty(columnName))
+            {
+                throw new ArgumentNullException(columnName);
+            }
+
+            var member = lambda.Body as MemberExpression;
+            if(member != null)
+            {
+                var propInfo = member.Member as PropertyInfo;
+                if(propInfo != null)
+                {
+                    if(_propertyMappings.ContainsKey(propInfo.Name))
+                    {
+                        _propertyMappings[propInfo.Name] = columnName;
+                    }
+                    else
+                    {
+                        _propertyMappings.Add(propInfo.Name, columnName);
+                    }
+                }
+            }
+        }
+
         public RowData ToRow(uint rowNo)
         {
             if(rowNo == 0)
@@ -34,6 +64,11 @@ namespace TopSoft.ExcelExport.Entity
                     if(dataCellAttr != null)
                     {
                         var cellColumnName = dataCellAttr.ColumnName;
+
+                        if(_propertyMappings.ContainsKey(dataCell.Name)) 
+                        {
+                            cellColumnName = _propertyMappings[dataCell.Name];
+                        }
 
                         var cellDataType = ExcelHelper.ResolveCellType(target.GetType());
                         var cellDataValue = target.ToString();

@@ -61,9 +61,19 @@ namespace TopSoft.ExcelExport.Helpers
             {
                 retCellType = CellValues.String;
             }
-            else if(propertyType == typeof(decimal))
+            else if(propertyType == typeof(sbyte) || propertyType == typeof(byte) || propertyType == typeof(short) || propertyType == typeof(ushort)
+                    || propertyType == typeof(int) || propertyType == typeof(uint) || propertyType == typeof(long) || propertyType == typeof(ulong)
+                    || propertyType == typeof(float) || propertyType == typeof(double) || propertyType == typeof(decimal))
             {
                 retCellType = CellValues.Number;
+            }
+            else if(propertyType == typeof(bool))
+            {
+                retCellType = CellValues.Boolean;
+            }
+            else
+            {
+                throw new Exception(string.Format("Unsuported property of type {0} in ExcelRow.", propertyType.Name));
             }
 
             return retCellType;
