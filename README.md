@@ -84,4 +84,7 @@ In this example, the description will be placed at column "F" only for this part
 
 That's All!
 
-View [Samples Project](https://github.com/TopSoftSolutions/TopSoft.ExcelExport/tree/master/TopSoft.ExcelExport.Samples) for more info.
+View [Samples Project](https://github.com/TopSoftSolutions/TopSoft.ExcelExport/tree/master/TopSoft.ExcelExport.Samples) for more examples.
+
+Read [wiki page](https://github.com/TopSoftSolutions/TopSoft.ExcelExport/wiki) for more info about exporting data to excel.
+
