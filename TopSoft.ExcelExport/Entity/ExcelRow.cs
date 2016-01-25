@@ -74,12 +74,34 @@ namespace TopSoft.ExcelExport.Entity
                         var cellDataValue = target.ToString();
 
                         var cellReference = cellColumnName + rowNo;
-                        var cell = new Cell() { CellReference = cellReference };
 
+                        var cell = new Cell() { CellReference = cellReference };
                         cell.CellValue = new CellValue(cellDataValue);
                         cell.DataType = new EnumValue<CellValues>(cellDataType);
 
-                        retRowData.Cells.Add(cell);
+                        var excelCell = new ExcelCell();
+                        excelCell.Cell = cell;
+
+                        var cellFillAttr = dataCell.GetCustomAttributes(false).Where(atr => atr is CellFillAttribute).FirstOrDefault() as CellFillAttribute;
+                        var cellBorderAttr = dataCell.GetCustomAttributes(false).Where(atr => atr is CellBorderAttribute).FirstOrDefault() as CellBorderAttribute;
+                        var cellFontAttr = dataCell.GetCustomAttributes(false).Where(atr => atr is CellTextAttribute).FirstOrDefault() as CellTextAttribute;
+
+                        if(cellFillAttr != null)
+                        {
+                            excelCell.Styles.Add(cellFillAttr.GetFill());
+                        }
+
+                        if(cellBorderAttr != null)
+                        {
+                            excelCell.Styles.Add(cellBorderAttr.GetBorder());
+                        }
+
+                        if(cellFontAttr != null)
+                        {
+                            excelCell.Styles.Add(cellFontAttr.GetFont());
+                        }
+
+                        retRowData.Cells.Add(excelCell);
                     }
                 }
             }

@@ -5,13 +5,13 @@ namespace TopSoft.ExcelExport.Samples.Products
 {
     class Product : ExcelRow
     {
-        [CellData("A")]
+        [CellData("A"), CellBorder(left: true, right: true, top: true, bottom: true)]
         public string Name { get; set; }
 
-        [CellData("B")]
+        [CellData("B"), CellText(bold: true, italic: true)]
         public string Description { get; set; }
 
-        [CellData("C")]
+        [CellData("C"), CellFill(hexColor: "FFFF0000")]
         public double Price { get; set; }
     }
 }
