@@ -13,6 +13,7 @@ You can install it by running `Install-Package DocumentFormat.OpenXml` in the Nu
 
 #### Restrictions
 `Topsoft.ExcelExport` now works only for simple data types in models.
+Styles can't be applied on the fly. ( in development )
 
 #### Let's Start
 
@@ -81,6 +82,25 @@ For example:
 ```
 
 In this example, the description will be placed at column "F" only for this particular instance of `product`. Other entities will continue to use column name specified by the `CellData` attribute.
+
+#### Step 5. What about styles ?
+
+Here's example of usage `CellBorder`, `CellText` and `CellFill` attributes:
+
+```c#
+    class Product : ExcelRow
+    {
+        [CellData("A"), CellBorder(left: true, right: true, top: true, bottom: true)]
+        public string Name { get; set; }
+
+        [CellData("B"), CellText(bold: true, italic: true)]
+        public string Description { get; set; }
+
+        [CellData("C"), CellFill(hexColor: "FFFF0000")]
+        public double Price { get; set; }
+    }
+```
+
 
 That's All!
 
