@@ -1,5 +1,10 @@
 #### TopSoft.ExcelExport
-~~Small~~ Very Small Toolkit to easy exporting data to excel
+Toolkit to easy exporting data to excel via C#
+
+#### Install TopSoft.ExcelExport via NuGet
+To install TopSoft.ExcelExport, run the following command in the Package Manager Console
+
+`PM> Install-Package TopSoft.ExcelExport`
 
 #### External Dependencies
 > OpenXML SDK 2.5
@@ -8,6 +13,7 @@ You can install it by running `Install-Package DocumentFormat.OpenXml` in the Nu
 
 #### Restrictions
 `Topsoft.ExcelExport` now works only for simple data types in models.
+Styles can't be applied on the fly. ( in development )
 
 #### Let's Start
 
@@ -50,7 +56,7 @@ class Product : ExcelRow
 SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook);
 ```
 
-#### Step 4. Initialize `ExcelExportContext` object by passing the instance of the target `SpreadsheetDocument. Then by calling the `RenderEntity`  for each of the entities, they'll be exported to the Excel file.
+#### Step 4. Initialize `ExcelExportContext` object by passing the instance of the target `SpreadsheetDocument.` Then by calling the `RenderEntity`  for each of the entities, they'll be exported to the Excel file.
 
 ```c#
       var excelExportContext = new ExportContext(spreadsheetDocument)
@@ -77,6 +83,28 @@ For example:
 
 In this example, the description will be placed at column "F" only for this particular instance of `product`. Other entities will continue to use column name specified by the `CellData` attribute.
 
+#### Step 5. What about styles ?
+
+Here's example of usage `CellBorder`, `CellText` and `CellFill` attributes:
+
+```c#
+    class Product : ExcelRow
+    {
+        [CellData("A"), CellBorder(left: true, right: true, top: true, bottom: true)]
+        public string Name { get; set; }
+
+        [CellData("B"), CellText(bold: true, italic: true)]
+        public string Description { get; set; }
+
+        [CellData("C"), CellFill(hexColor: "FFFF0000")]
+        public double Price { get; set; }
+    }
+```
+
+
 That's All!
 
-View [Samples Project](https://github.com/TopSoftSolutions/TopSoft.ExcelExport/tree/master/TopSoft.ExcelExport.Samples) for more info.
+View [Samples Project](https://github.com/TopSoftSolutions/TopSoft.ExcelExport/tree/master/TopSoft.ExcelExport.Samples) for more examples.
+
+Read [wiki page](https://github.com/TopSoftSolutions/TopSoft.ExcelExport/wiki) for more info about exporting data to excel.
+
