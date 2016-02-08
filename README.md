@@ -83,7 +83,7 @@ For example:
 
 In this example, the description will be placed at column "F" only for this particular instance of `product`. Other entities will continue to use column name specified by the `CellData` attribute.
 
-#### Step 5. What about styles ?
+#### Step 6. What about styles ?
 
 Here's example of usage `CellBorder`, `CellText` and `CellFill` attributes:
 
@@ -101,6 +101,21 @@ Here's example of usage `CellBorder`, `CellText` and `CellFill` attributes:
     }
 ```
 
+#### Step 7. Adding excel column styles on the fly.
+You can add excel column styles on the fly. Like In Column Mappings, except you need to call `MapStyle`.
+
+For Example:
+
+```c#
+    if(product.Price > 44)
+    {
+        product.MapStyle<Product>(x => x.Name, new CellFill(hexColor: "FFFF0000"));
+    }
+    if(product.Price < 33)
+    {
+        product.MapStyle<Product>(x => x.Name, new CellBorder(left: true, right: true));
+    }
+```                    
 
 That's All!
 
