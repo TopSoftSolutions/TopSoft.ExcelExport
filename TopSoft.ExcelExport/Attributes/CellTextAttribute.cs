@@ -10,7 +10,7 @@ namespace TopSoft.ExcelExport.Attributes
     {
         public bool Bold { get; private set; } 
         public bool Italic { get; private set; }
-        public bool Underliine { get; set; }
+        public bool Underliine { get; private set; }
 
         public CellTextAttribute(bool bold = false, bool italic = false, bool underline = false)
         {

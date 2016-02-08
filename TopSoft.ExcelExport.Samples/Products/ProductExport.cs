@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using TopSoft.ExcelExport.Styles;
 
 namespace TopSoft.ExcelExport.Samples.Products
 {
@@ -30,6 +31,12 @@ namespace TopSoft.ExcelExport.Samples.Products
                     if(product.Price > 44)
                     {
                         product.MapColumn<Product>(x => x.Description, "F");
+                        product.MapStyle<Product>(x => x.Name, new CellFill(hexColor: "FFFF0000"));
+                    }
+
+                    if(product.Price < 33)
+                    {
+                        product.MapStyle<Product>(x => x.Name, new CellBorder(left: true, right: true));
                     }
 
                     excelExportContext.RenderEntity(product, rowNo);
