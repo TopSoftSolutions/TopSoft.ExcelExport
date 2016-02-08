@@ -8,10 +8,13 @@ namespace TopSoft.ExcelExport.Samples.Products
         [CellData("A"), CellBorder(left: true, right: true, top: true, bottom: true)]
         public string Name { get; set; }
 
-        [CellData("B"), CellText(bold: true, italic: true)]
+        [CellData("B")]
+        public string Code { get; set; }
+
+        [CellData("C"), CellText(bold: true, italic: true)]
         public string Description { get; set; }
 
-        [CellData("C"), CellFill(hexColor: "FFFF0000")]
+        [CellData("D"), CellFill(hexColor: "FFFF0000")]
         public double Price { get; set; }
     }
 }

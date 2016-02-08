@@ -129,9 +129,9 @@ namespace TopSoft.ExcelExport.Entity
 
                 if(cellStyleMappings != null)
                 {
-                    cellFillMap = cellStyleMappings.Where(x => x is CellFill) as CellFill;
-                    cellBorderMap = cellStyleMappings.Where(x => x is CellBorder) as CellBorder;
-                    cellFontMap = cellStyleMappings.Where(x => x is CellText) as CellText;
+                    cellFillMap = cellStyleMappings.Where(x => x is CellFill).FirstOrDefault() as CellFill;
+                    cellBorderMap = cellStyleMappings.Where(x => x is CellBorder).FirstOrDefault() as CellBorder;
+                    cellFontMap = cellStyleMappings.Where(x => x is CellText).FirstOrDefault() as CellText;
                 }
 
                 

@@ -9,11 +9,11 @@ namespace TopSoft.ExcelExport.Samples.Products
     {
         private List<Product> _products = new List<Product>()
         {
-            new Product() { Name="telephone", Description="telephone sample description", Price = 10.5},
-            new Product() { Name="tv", Description="tv sample description", Price = 22.5},
-            new Product() { Name="notebook", Description="notebook sample description", Price = 44.66},
-            new Product() { Name="monitor", Description="monitor sample description", Price = 77.8},
-            new Product() { Name="keyboard", Description="keyboard sample description", Price = 90.5}
+            new Product() { Name="telephone", Code = "TP", Description="telephone sample description", Price = 10.5},
+            new Product() { Name="tv", Code = "TV", Description="tv sample description", Price = 22.5},
+            new Product() { Name="notebook", Code = "NB", Description="notebook sample description", Price = 44.66},
+            new Product() { Name="monitor", Code = "MT", Description="monitor sample description", Price = 77.8},
+            new Product() { Name="keyboard", Code = "KB", Description="keyboard sample description", Price = 90.5}
 
         };
         public void Process()
@@ -34,7 +34,7 @@ namespace TopSoft.ExcelExport.Samples.Products
 
                     if(product.Price < 33)
                     {
-                        product.MapStyle<Product>(x => x.Name, new CellBorder(left: true, right: true));
+                        product.MapStyle<Product>(x => x.Code, new CellBorder(left: true, right: true));
                     }
 
                     excelExportContext.RenderEntity(product, rowNo);
