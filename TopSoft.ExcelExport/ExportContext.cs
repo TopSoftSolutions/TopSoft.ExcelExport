@@ -56,36 +56,60 @@ namespace TopSoft.ExcelExport
 
             }
 
-            WorkbookStylesPart stylesPart = SpreadSheet.WorkbookPart.AddNewPart<WorkbookStylesPart>();
-            stylesPart.Stylesheet = new Stylesheet();
+            WorkbookStylesPart stylesPart = SpreadSheet.WorkbookPart.WorkbookStylesPart;
+            if(stylesPart == null)
+            {
+                stylesPart = SpreadSheet.WorkbookPart.AddNewPart<WorkbookStylesPart>();
+            }
+            if(stylesPart.Stylesheet == null)
+            {
+                stylesPart.Stylesheet = new Stylesheet();
+            }
+
             StyleSheet = stylesPart.Stylesheet;
 
-            StyleSheet.Fonts = new Fonts();
-            // required by Excel
-            StyleSheet.Fonts.AppendChild(new Font());
-            StyleSheet.Fonts.Count = 1;
+            if(StyleSheet.Fonts == null)
+            {
+                StyleSheet.Fonts = new Fonts();
+                // required by Excel
+                StyleSheet.Fonts.AppendChild(new Font());
+                StyleSheet.Fonts.Count = 1;
+            }
 
-            StyleSheet.Fills = new Fills();
-            // required, reserved by Excel
-            StyleSheet.Fills.Append(new Fill { PatternFill = new PatternFill { PatternType = PatternValues.None } });
-            // required, reserved by Excel 
-            StyleSheet.Fills.Append(new Fill { PatternFill = new PatternFill { PatternType = PatternValues.Gray125 } }); 
-            StyleSheet.Fills.Count = 2;
+            if(StyleSheet.Fills == null)
+            {
+                StyleSheet.Fills = new Fills();
+                // required, reserved by Excel
+                StyleSheet.Fills.Append(new Fill { PatternFill = new PatternFill { PatternType = PatternValues.None } });
+                // required, reserved by Excel 
+                StyleSheet.Fills.Append(new Fill { PatternFill = new PatternFill { PatternType = PatternValues.Gray125 } });
+                StyleSheet.Fills.Count = 2;
+            }
 
-            StyleSheet.Borders = new Borders();
-            // required by Excel
-            StyleSheet.Borders.Append(new Border());
-            StyleSheet.Borders.Count = 1;
+            if(StyleSheet.Borders == null)
+            {
+                StyleSheet.Borders = new Borders();
+                // required by Excel
+                StyleSheet.Borders.Append(new Border());
+                StyleSheet.Borders.Count = 1;
+            }
 
-            StyleSheet.CellStyleFormats = new CellStyleFormats();
-            // required by Excel
-            StyleSheet.CellStyleFormats.Append(new CellFormat());
-            StyleSheet.CellStyleFormats.Count = 1;
+            if(StyleSheet.CellStyleFormats == null)
+            {
+                StyleSheet.CellStyleFormats = new CellStyleFormats();
+                // required by Excel
+                StyleSheet.CellStyleFormats.Append(new CellFormat());
+                StyleSheet.CellStyleFormats.Count = 1;
+            }
 
-            StyleSheet.CellFormats = new CellFormats();
-            // required by Excel
-            StyleSheet.CellFormats.AppendChild(new CellFormat());
-            StyleSheet.CellFormats.Count = 1;
+            if(StyleSheet.CellFormats == null)
+            {
+                StyleSheet.CellFormats = new CellFormats();
+                // required by Excel
+                StyleSheet.CellFormats.AppendChild(new CellFormat());
+                StyleSheet.CellFormats.Count = 1;
+            }
+
 
             Worksheet = SpreadSheet.WorkbookPart.WorksheetParts.First().Worksheet;
             SheetData = Worksheet.GetFirstChild<SheetData>();
@@ -144,7 +168,6 @@ namespace TopSoft.ExcelExport
 
                         existingCell.StyleIndex = InsertCellFormat(cellFormat);
                     }
-
                 }
 
                 SheetData.Append(rowData.Row);
