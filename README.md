@@ -83,7 +83,13 @@ For example:
 
 In this example, the description will be placed at column "F" only for this particular instance of `product`. Other entities will continue to use column name specified by the `CellData` attribute.
 
-#### Step 6. What about styles ?
+#### Step 6. Gettig excel column names on the fly.
+For Example:
+```c#
+    var columnName = product.GetColumnIndex<Product>(x => x.Name);
+```   
+
+#### Step 7. What about styles ?
 
 Here's example of usage `CellBorder`, `CellText` and `CellFill` attributes:
 
@@ -101,7 +107,7 @@ Here's example of usage `CellBorder`, `CellText` and `CellFill` attributes:
     }
 ```
 
-#### Step 7. Adding excel column styles on the fly.
+#### Step 8. Adding excel column styles on the fly.
 You can add excel column styles on the fly. Like In Column Mappings, except you need to call `MapStyle`.
 
 For Example:
@@ -116,6 +122,19 @@ For Example:
         product.MapStyle<Product>(x => x.Name, new CellBorder(left: true, right: true));
     }
 ```                    
+
+#### Step 9. Using Formulas
+You can define forumla fields in your models, data putted in this fields will be represented as formulas in excel.
+
+For Example:
+
+```c#
+    class Product : ExcelRow
+    {
+        [CellData("A"), CellFormula]
+        public string Name { get; set; }
+    }
+``` 
 
 That's All!
 
