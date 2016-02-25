@@ -72,8 +72,6 @@ SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(fileName, S
 #### Step 5. Adding excel column mappings on the fly.
 You can add excel column mapping on the fly before calling `RenderEntity` function for model entities. Column Mappings are instance-level and will affect only the particular object for which `MapColumn` function has been called.
 
-For example:
-
 ```c#
    if(product.Price > 44)
    {
@@ -84,7 +82,7 @@ For example:
 In this example, the description will be placed at column "F" only for this particular instance of `product`. Other entities will continue to use column name specified by the `CellData` attribute.
 
 #### Step 6. Gettig excel column names on the fly.
-For Example:
+
 ```c#
     var columnName = product.GetColumnIndex<Product>(x => x.Name);
 ```   
@@ -110,8 +108,6 @@ Here's example of usage `CellBorder`, `CellText` and `CellFill` attributes:
 #### Step 8. Adding excel column styles on the fly.
 You can add excel column styles on the fly. Like In Column Mappings, except you need to call `MapStyle`.
 
-For Example:
-
 ```c#
     if(product.Price > 44)
     {
@@ -125,8 +121,6 @@ For Example:
 
 #### Step 9. Using Formulas
 You can define forumla fields in your models, data putted in this fields will be represented as formulas in excel.
-
-For Example:
 
 ```c#
     class Product : ExcelRow
