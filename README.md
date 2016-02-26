@@ -126,9 +126,13 @@ You can define forumla fields in your models, data putted in this fields will be
     class Product : ExcelRow
     {
         [CellData("A"), CellFormula]
-        public string Name { get; set; }
+        public string TotalFormula { get; set; }
     }
 ``` 
+Then you can just put your formula in `TotalFormula` like this:
+```c#
+    product.TotalFormula = "SUM(A1:B1)";
+```
 
 That's All!
 
