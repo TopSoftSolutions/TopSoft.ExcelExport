@@ -12,8 +12,7 @@ To install TopSoft.ExcelExport, run the following command in the Package Manager
 You can install it by running `Install-Package DocumentFormat.OpenXml` in the Nu-Get Package Manager.
 
 #### Restrictions
-`Topsoft.ExcelExport` now works only for simple data types in models.
-Styles can't be applied on the fly. ( in development )
+`Topsoft.ExcelExport` works only for simple data types in models.
 
 #### Let's Start
 
